@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Orange Scale + Semantic</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:#fff;font-family:var(--font-body)}
+  h4{font-family:var(--font-display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3);margin:0 0 10px 0;font-weight:400}
+  .row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+  .sw{border-radius:8px;overflow:hidden;border:1px solid var(--border-subtle)}
+  .chip{height:56px}
+  .meta{padding:6px 10px;background:#fff}
+  .name{font-family:var(--font-display);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-1);display:block}
+  .hex{font-family:var(--font-mono);font-size:10px;color:var(--fg-3);display:block}
+  .semantic{grid-template-columns:repeat(4,1fr)}
+</style></head>
+<body>
+  <h4>Orange Scale</h4>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:#A74E10"></div><div class="meta"><span class="name">Press</span><span class="hex">#A74E10</span></div></div>
+    <div class="sw"><div class="chip" style="background:#C85E14"></div><div class="meta"><span class="name">Hover</span><span class="hex">#C85E14</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E36F1E"></div><div class="meta"><span class="name">Base</span><span class="hex">#E36F1E</span></div></div>
+    <div class="sw"><div class="chip" style="background:#F8D6B4"></div><div class="meta"><span class="name">Soft</span><span class="hex">#F8D6B4</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FCEEE1"></div><div class="meta"><span class="name">Tint</span><span class="hex">#FCEEE1</span></div></div>
+  </div>
+  <h4>Semantic</h4>
+  <div class="row semantic">
+    <div class="sw"><div class="chip" style="background:#3FA96A"></div><div class="meta"><span class="name">Success</span><span class="hex">#3FA96A</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E8A838"></div><div class="meta"><span class="name">Warning</span><span class="hex">#E8A838</span></div></div>
+    <div class="sw"><div class="chip" style="background:#D33A2C"></div><div class="meta"><span class="name">Danger</span><span class="hex">#D33A2C</span></div></div>
+    <div class="sw"><div class="chip" style="background:#4A86C4"></div><div class="meta"><span class="name">Info</span><span class="hex">#4A86C4</span></div></div>
+  </div>
+</body></html>

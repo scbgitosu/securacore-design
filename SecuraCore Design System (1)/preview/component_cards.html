@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Cards</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--sc-grey-100);font-family:'Open Sans',sans-serif}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:#fff;border-radius:12px;padding:22px;box-shadow:var(--shadow-sm)}
+  .card.hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+  .eyebrow{font-family:'Posterama',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sc-orange);margin:0 0 8px}
+  .title{font-family:'Posterama',sans-serif;font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:var(--sc-ink);margin:0 0 8px}
+  .body{font-size:14px;line-height:1.5;color:var(--fg-2);margin:0}
+  .icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--sc-grey-100);border-radius:10px;margin-bottom:14px}
+  .icon img{width:32px;height:32px;object-fit:contain}
+  .card.photo{padding:0;overflow:hidden;background:var(--sc-ink)}
+  .card.photo .img{height:110px;background:url('../assets/photo-living-room-theater.png') center/cover}
+  .card.photo .meta{padding:16px 18px}
+  .card.photo .title{color:#fff}
+  .card.photo .body{color:rgba(255,255,255,.7)}
+</style></head>
+<body>
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><img src="../assets/icon-wifi.png"></div>
+      <p class="eyebrow">WI-FI</p>
+      <h3 class="title">Whole Home Wi-Fi</h3>
+      <p class="body">Mesh networks designed around your floor plan — no dead zones, ever.</p>
+    </div>
+    <div class="card hover">
+      <div class="icon"><img src="../assets/icon-cameras.png"></div>
+      <p class="eyebrow">SECURITY</p>
+      <h3 class="title">Security Cameras</h3>
+      <p class="body">4K cameras, on-premise NVR, clean cable runs. One app, every view.</p>
+    </div>
+    <div class="card photo" style="grid-column:span 2">
+      <div class="img"></div>
+      <div class="meta">
+        <p class="eyebrow">CASE STUDY</p>
+        <h3 class="title">Tetherow Residence · 5,400 sq ft</h3>
+        <p class="body">Whole-home Wi-Fi, 12-camera surveillance, integrated theater — one install, one team.</p>
+      </div>
+    </div>
+  </div>
+</body></html>

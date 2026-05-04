@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SecuraCore — Proposal Template</title>
+<meta name="ext-resource-dependency" content="../assets-slim/photo-home-exterior-01.jpg" data-resource-id="photo-home-exterior-01.png">
+<meta name="ext-resource-dependency" content="../assets-slim/photo-home-driveway.jpg" data-resource-id="photo-home-driveway.png">
+<meta name="ext-resource-dependency" content="../../assets/logo-securacore-horizontal.png" data-resource-id="logo-horizontal">
+<meta name="ext-resource-dependency" content="../../assets/logo-mark.png" data-resource-id="logo-mark">
+<link rel="stylesheet" href="colors_and_type-slim.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: var(--sc-grey-100); font-family: 'Open Sans', sans-serif; color: var(--sc-ink); }
+  * { box-sizing: border-box; }
+
+  /* Viewer chrome — hidden on print */
+  .viewer-chrome {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--sc-ink); color: #fff;
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 3px solid var(--sc-orange);
+  }
+  .viewer-tabs { display: flex; gap: 4px; }
+  .viewer-tab {
+    padding: 8px 18px;
+    font-family: 'Posterama', sans-serif; font-size: 11;
+    letter-spacing: .22em; text-transform: uppercase; font-weight: 700;
+    background: transparent; color: rgba(255,255,255,.6);
+    border: 1px solid rgba(255,255,255,.15);
+    cursor: pointer; transition: all .15s;
+  }
+  .viewer-tab:hover { color: #fff; }
+  .viewer-tab.active { background: var(--sc-orange); color: #fff; border-color: var(--sc-orange); }
+
+  .doc-stage { padding: 40px 24px 80px; }
+
+  @media print {
+    .viewer-chrome { display: none !important; }
+    body { background: #fff; }
+    .doc-stage { padding: 0; }
+    section { box-shadow: none !important; margin: 0 !important; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#1D252D"/>
+  <g transform="translate(50 52)" fill="none" stroke="#fff" stroke-width="2">
+    <circle r="22" stroke-dasharray="120 30"/>
+    <path d="M-10 6 L0 -8 L10 6 Z" fill="#E36F1E" stroke="none"/>
+    <path d="M-10 6 L-10 12 L10 12 L10 6" stroke-linejoin="round"/>
+  </g>
+</svg>
+</template>
+<div id="root"></div>
+
+<script src="sampleData.js"></script>
+<script type="text/babel" src="inventory.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="CoverPage.jsx"></script>
+<script type="text/babel" src="AboutUs.jsx"></script>
+<script type="text/babel" src="PhotoPage.jsx"></script>
+<script type="text/babel" src="ProjectDescription.jsx"></script>
+<script type="text/babel" src="AreaBlock.jsx"></script>
+<script type="text/babel" src="FinancialSummary.jsx"></script>
+<script type="text/babel" src="PaymentSchedule.jsx"></script>
+<script type="text/babel" src="ProjectTerms.jsx"></script>
+<script type="text/babel" src="InventoryBrowser.jsx"></script>
+
+<script type="text/babel">
+// Compose the full proposal. We dynamically compute page numbers based on
+// how many areas there are — every area gets its own page. Keeps the footer
+// "X of Y" consistent.
+function ProposalDocument({data}) {
+  const d = data;
+  const areaPages = d.areas.length;
+  const TOTAL = 5 + areaPages + 3; // cover + about + 2 photos + desc + areas + fin + pay + terms
+  let n = 1;
+
+  return (
+    <React.Fragment>
+      <CoverPage data={d} />
+      <AboutUs data={d} />
+      <PhotoPage data={d} src="photo-home-exterior-01.png"
+        caption="Residential Installs Across Bend, Sunriver &amp; Sisters"
+        pageN={3} />
+      <PhotoPage data={d} src="photo-home-driveway.png"
+        caption="Clean Runs. Hidden Wiring. Integrated Control."
+        pageN={4} />
+      <ProjectDescription data={d} />
+      {d.areas.map((area, i) => (
+        <AreaBlock key={area.name} data={d} area={area}
+          pageN={6 + i} pagesTotal={TOTAL}
+          splitIdx={1} totalSplits={1} />
+      ))}
+      <FinancialSummary data={d} pageN={6 + areaPages} pagesTotal={TOTAL} />
+      <PaymentSchedule  data={d} pageN={7 + areaPages} pagesTotal={TOTAL} />
+      <ProjectTerms     data={d} pageN={8 + areaPages} pagesTotal={TOTAL} />
+    </React.Fragment>
+  );
+}
+
+function App() {
+  const [tab, setTab] = React.useState('proposal');
+  return (
+    <React.Fragment>
+      <div className="viewer-chrome">
+        <div style={{display: 'flex', alignItems: 'center', gap: 16}}>
+          <img src={(window.__resources && window.__resources['logo-horizontal']) || '../../assets/logo-securacore-horizontal.png'} style={{height: 28, filter: 'brightness(0) invert(1)'}} alt="" />
+          <span style={{
+            fontFamily: 'Posterama, sans-serif', fontSize: 11,
+            letterSpacing: '.22em', textTransform: 'uppercase',
+            color: 'rgba(255,255,255,.6)',
+          }}>Proposal Kit · Demo</span>
+        </div>
+        <div className="viewer-tabs">
+          <button className={`viewer-tab ${tab === 'proposal' ? 'active' : ''}`} onClick={() => setTab('proposal')}>Sample Proposal #{proposalData.proposalNumber}</button>
+          <button className={`viewer-tab ${tab === 'inventory' ? 'active' : ''}`} onClick={() => setTab('inventory')}>Inventory Browser</button>
+        </div>
+        <div style={{display: 'flex', gap: 10}}>
+          <button onClick={() => window.print()} style={{
+            padding: '8px 16px', background: 'var(--sc-orange)', color: '#fff',
+            border: 'none', fontFamily: 'Posterama, sans-serif', fontSize: 11,
+            letterSpacing: '.22em', textTransform: 'uppercase', fontWeight: 700, cursor: 'pointer',
+          }}>Print / Save PDF</button>
+        </div>
+      </div>
+
+      <div className="doc-stage">
+        {tab === 'proposal' && <ProposalDocument data={proposalData} />}
+        {tab === 'inventory' && <InventoryBrowser />}
+      </div>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

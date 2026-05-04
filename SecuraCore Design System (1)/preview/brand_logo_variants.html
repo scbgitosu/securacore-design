@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Logo — Variants</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:#fff;font-family:var(--font-body)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .tile{border:1px solid var(--border-default);border-radius:8px;padding:20px;display:flex;align-items:center;justify-content:center;min-height:96px}
+  .tile.dark{background:var(--sc-ink);border-color:transparent}
+  img{max-height:60px;max-width:100%;display:block}
+  .lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sc-grey-500);margin-top:8px;text-align:center;font-weight:600}
+  .cell{display:flex;flex-direction:column}
+</style></head>
+<body>
+  <div class="grid">
+    <div class="cell"><div class="tile"><img src="../assets/logo-home-horizontal.jpg" alt=""></div><div class="lbl">Home lockup</div></div>
+    <div class="cell"><div class="tile"><img src="../assets/logo-business-horizontal.jpg" alt=""></div><div class="lbl">Business lockup</div></div>
+    <div class="cell"><div class="tile dark"><img src="../assets/icon-dark-security.jpg" style="max-height:80px" alt=""></div><div class="lbl">Icon on dark plate</div></div>
+    <div class="cell"><div class="tile"><img src="../assets/logo-badge-supplier.png" style="max-height:80px" alt=""></div><div class="lbl">Bend supplier badge</div></div>
+  </div>
+</body></html>

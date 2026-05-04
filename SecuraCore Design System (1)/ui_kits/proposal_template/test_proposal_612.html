@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SecuraCore — Test Proposal #612 (Cascade Law)</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: var(--sc-grey-100); font-family: 'Open Sans', sans-serif; color: var(--sc-ink); }
+  * { box-sizing: border-box; }
+  .viewer-chrome {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--sc-ink); color: #fff;
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 3px solid var(--sc-orange);
+  }
+  .doc-stage { padding: 40px 24px 80px; }
+  @media print {
+    .viewer-chrome { display: none !important; }
+    body { background: #fff; }
+    .doc-stage { padding: 0; }
+    section { box-shadow: none !important; margin: 0 !important; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="testData.js"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="CoverPage.jsx"></script>
+<script type="text/babel" src="AboutUs.jsx"></script>
+<script type="text/babel" src="PhotoPage.jsx"></script>
+<script type="text/babel" src="ProjectDescription.jsx"></script>
+<script type="text/babel" src="AreaBlock.jsx"></script>
+<script type="text/babel" src="FinancialSummary.jsx"></script>
+<script type="text/babel" src="PaymentSchedule.jsx"></script>
+<script type="text/babel" src="ProjectTerms.jsx"></script>
+
+<script type="text/babel">
+function ProposalDocument({data}) {
+  const d = data;
+  const areaPages = d.areas.length;
+  const TOTAL = 5 + areaPages + 3;
+  return (
+    <React.Fragment>
+      <CoverPage data={d} />
+      <AboutUs data={d} />
+      <PhotoPage data={d} src="photo-home-exterior-01.png"
+        caption="Commercial Fit-Outs Across Central Oregon"
+        pageN={3} />
+      <PhotoPage data={d} src="photo-living-room-theater.png"
+        caption="Conference-Ready Displays. Crystal-Clear Calls."
+        pageN={4} />
+      <ProjectDescription data={d} />
+      {d.areas.map((area, i) => (
+        <AreaBlock key={area.name} data={d} area={area}
+          pageN={6 + i} pagesTotal={TOTAL}
+          splitIdx={1} totalSplits={1} />
+      ))}
+      <FinancialSummary data={d} pageN={6 + areaPages} pagesTotal={TOTAL} />
+      <PaymentSchedule  data={d} pageN={7 + areaPages} pagesTotal={TOTAL} />
+      <ProjectTerms     data={d} pageN={8 + areaPages} pagesTotal={TOTAL} />
+    </React.Fragment>
+  );
+}
+
+function App() {
+  return (
+    <React.Fragment>
+      <div className="viewer-chrome">
+        <div style={{display: 'flex', alignItems: 'center', gap: 16}}>
+          <img src="../../assets/logo-securacore-horizontal.png" style={{height: 28, filter: 'brightness(0) invert(1)'}} alt="" />
+          <span style={{
+            fontFamily: 'Posterama, sans-serif', fontSize: 11,
+            letterSpacing: '.22em', textTransform: 'uppercase',
+            color: 'rgba(255,255,255,.6)',
+          }}>Test Proposal #{proposalData.proposalNumber} · Cascade Law</span>
+        </div>
+        <div style={{display: 'flex', gap: 10}}>
+          <a href="index.html" style={{
+            padding: '8px 16px', background: 'transparent', color: '#fff',
+            border: '1px solid rgba(255,255,255,.25)', textDecoration: 'none',
+            fontFamily: 'Posterama, sans-serif', fontSize: 11,
+            letterSpacing: '.22em', textTransform: 'uppercase', fontWeight: 700,
+          }}>← Back to Kit</a>
+          <button onClick={() => window.print()} style={{
+            padding: '8px 16px', background: 'var(--sc-orange)', color: '#fff',
+            border: 'none', fontFamily: 'Posterama, sans-serif', fontSize: 11,
+            letterSpacing: '.22em', textTransform: 'uppercase', fontWeight: 700, cursor: 'pointer',
+          }}>Print / Save PDF</button>
+        </div>
+      </div>
+      <div className="doc-stage">
+        <ProposalDocument data={proposalData} />
+      </div>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

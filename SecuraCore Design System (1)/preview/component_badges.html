@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Badges + Tags</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:28px;background:#fff;font-family:var(--font-body)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+  .lbl{font-family:var(--font-mono);font-size:10px;color:var(--fg-3);min-width:90px}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-family:'Posterama',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border-radius:999px;font-weight:400}
+  .b-orange{background:var(--sc-orange);color:#fff}
+  .b-tint{background:var(--sc-orange-tint);color:var(--sc-orange-press)}
+  .b-ink{background:var(--sc-ink);color:#fff}
+  .b-ghost{background:transparent;color:var(--sc-ink);border:1px solid var(--border-strong)}
+  .b-success{background:#E8F5ED;color:#2C7A4A}
+  .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+</style></head>
+<body>
+  <div class="row"><span class="lbl">Category</span><span class="badge b-orange">NEW</span><span class="badge b-ink">Featured</span><span class="badge b-tint">Popular</span><span class="badge b-ghost">Residential</span></div>
+  <div class="row"><span class="lbl">Status</span><span class="badge b-success"><span class="dot"></span>Available</span><span class="badge b-tint"><span class="dot"></span>Scheduled</span></div>
+  <div class="row"><span class="lbl">Service</span><span class="badge b-ghost">Wi-Fi</span><span class="badge b-ghost">Security</span><span class="badge b-ghost">AV</span><span class="badge b-ghost">Lighting</span></div>
+</body></html>
